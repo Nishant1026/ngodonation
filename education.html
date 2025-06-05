@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .donation-form {
+            max-width: 400px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .item-options button {
+            width: 45%;
+            margin: 5px 2%;
+            background: #ff9800;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .item-options button:hover {
+            background: #e68900;
+        }
+        .donate-btn {
+            background: #4CAF50;
+            color: white;
+            font-size: 16px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        .donate-btn:hover {
+            background: #45a049;
+        }
+        .available-areas {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="donation-form">
+        <h2>Donate for Education</h2>
+        <p class="available-areas">Available Areas: Ranchi, Ramgarh, Hazaribagh</p>
+        <form  action="education.php" method="POST">
+            <label for="name-education">Full Name</label>
+            <input type="text" name="name" id="name-education" required>
+            
+            <label for="email-education">Email</label>
+            <input type="email" name="email" id="email-education" required>
+            
+            <label for="mobile-education">Mobile Number</label>
+            <input type="tel" name="mobile" id="mobile-education" pattern="[0-9]{10}" placeholder="Enter 10-digit mobile number" required>
+            
+            <label for="location-education">Enter Your Location</label>
+            <input type="text" name="location" id="location-education" required>
+            
+            <label>Choose Items to Donate</label>
+            <div class="item-options">
+                <button type="button" onclick="setEducationItem('Old Books')">Old Books</button>
+                <button type="button" onclick="setEducationItem('New Pens')">New Pens</button>
+                <button type="button" onclick="setEducationItem('Notebooks')">Notebooks</button>
+                <button type="button" onclick="setEducationItem('School Bags')">School Bags</button>
+            </div>
+            <input type="text" name="items" id="items-education" placeholder="Enter item(s) manually" required>
+            
+            <label for="quantity-education">Quantity</label>
+            <input type="number" name="quantity" id="quantity-education" min="1" required>
+            
+            <button type="submit" class="donate-btn">Donate Now</button>
+        </form>
+    </div>
+
+    <script>
+        const availableLocations = ["Ranchi","lalpur, ranchi", "morabadi ranchi","ranchi","kokar","kokar, lalpur","kokar lalpur, ranchi", "Ramgarh","ramgarh", "gola, ramgarh", "Gola, Ramgarh", "gola ramgarh","ranchi","lalpur", "Hazaribagh"];
+
+        function setEducationItem(value) {
+            document.getElementById('items-education').value = value;
+        }
+
+        document.getElementById('educationDonationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const location = document.getElementById('location-education').value.trim();
+            const mobile = document.getElementById('mobile-education').value.trim();
+            
+            if (availableLocations.includes(location)) {
+                alert('Thank you for your education donation! Our volunteer will contact you at ' + mobile);
+            } else {
+                alert('Sorry, our volunteer is not available in this area. You cannot donate here.');
+            }
+        });
+    </script>
+</body>
+</html>

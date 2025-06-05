@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Gateway</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .payment-container {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    h2 {
+      text-align: center;
+      color: #ff6600;
+    }
+    .payment-option {
+      margin: 10px 0;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    select, input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      transition: transform 0.2s ease-in-out;
+    }
+    button {
+      background-color: #ff6600;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e55b00;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="payment-container">
+    <h2>Choose Payment Method</h2>
+    <div class="payment-option">
+      <label for="payment-method">Select Method:</label>
+      <select id="payment-method">
+        <option value="gpay">Google Pay</option>
+        <option value="phonepe">PhonePe</option>
+        <option value="netbanking">Net Banking</option>
+        <option value="creditcard">Credit Card</option>
+        <option value="debitcard">Debit Card</option>
+        <option value="upi">UPI</option>
+      </select>
+    </div>
+    <div class="payment-option">
+      <label for="donation-amount">Enter Donation Amount (INR):</label>
+      <input type="number" id="donation-amount" placeholder="Amount in INR" min="1">
+    </div>
+    <button onclick="makePayment()">Proceed to Donate</button>
+  </div>
+
+  <script>
+    function makePayment() {
+      const method = document.getElementById('payment-method').value;
+      const amount = document.getElementById('donation-amount').value;
+      if (!amount || amount <= 0) {
+        alert('Please enter a valid donation amount in INR.');
+        return;
+      }
+      const messages = {
+        gpay: `Donate Successfully ₹${amount}`,
+        phonepe: `Donate Successfully ₹${amount}`,
+        netbanking: `Donate Successfully ₹${amount}`,
+        creditcard: `Donate Successfully ₹${amount}... 💳`,
+        debitcard: `Donate Successfully ₹${amount}... 💳`,
+        upi: `Donate Successfully ₹${amount}... 🔗`
+      };
+      alert(messages[method] || `Processing your donation of ₹${amount}...`);
+    }
+  </script>
+</body>
+</html>

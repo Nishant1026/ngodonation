@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Donation Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .donation-form {
+            max-width: 400px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .item-options button {
+            width: 45%;
+            margin: 5px 2%;
+            background: #ff9800;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .item-options button:hover {
+            background: #e68900;
+        }
+        .donate-btn {
+            background: #4CAF50;
+            color: white;
+            font-size: 16px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        .donate-btn:hover {
+            background: #45a049;
+        }
+        .available-areas {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="donation-form">
+        <h2>Donate for Pure Drinking Water</h2>
+        <p class="available-areas">Available Areas: Ranchi, Ramgarh, Hazaribagh</p>
+        <form action="water.php" method="POST">
+            <label for="name-water">Full Name</label>
+            <input type="text" name="name" id="name-water" required>
+            
+            <label for="email-water">Email</label>
+            <input type="email" name="email" id="email-water" required>
+            
+            <label for="mobile-water">Mobile Number</label>
+            <input type="tel"  name="mobile"  id="mobile-water" pattern="[0-9]{10}" placeholder="Enter 10-digit mobile number" required>
+            
+            <label for="location-water">Enter Your Location</label>
+            <input type="text" name="location" id="location-water" required>
+            
+            <label>Choose Water Donation Items</label>
+            <div class="item-options">
+                <button type="button" onclick="setWaterItem('Bottled Water')">Bottled Water</button>
+                <button type="button" onclick="setWaterItem('Water Purifier')">Water Purifier</button>
+                <button type="button" onclick="setWaterItem('Water Storage Tank')">Water Storage Tank</button>
+                <button type="button" onclick="setWaterItem('Filtration Kit')">Filtration Kit</button>
+            </div>
+            <input type="text" name="items" id="items-water" placeholder="Enter item(s) manually" required>
+            
+            <label for="quantity-water">Quantity</label>
+            <input type="number" name="quantity" id="quantity-water" min="1" required>
+            
+            <button type="submit" class="donate-btn">Donate Now</button>
+        </form>
+    </div>
+
+    <script>
+        const availableLocations = ["Ranchi","lalpur, ranchi","lalpur,ranchi", "lalpur","morabadi ranchi","ranchi","kokar","kokar, lalpur","kokar lalpur, ranchi", "Ramgarh","ramgarh", "gola, ramgarh", "Gola, Ramgarh", "gola ramgarh","gola", "Hazaribagh"];
+
+        function setWaterItem(value) {
+            document.getElementById('items-water').value = value;
+        }
+
+        document.getElementById('waterDonationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const location = document.getElementById('location-water').value.trim();
+            const mobile = document.getElementById('mobile-water').value.trim();
+            
+            if (availableLocations.includes(location)) {
+                alert('Thank you for your water donation! Our volunteer will contact you at ' + mobile);
+            } else {
+                alert('Sorry, our volunteer is not available in this area. You cannot donate here.');
+            }
+        });
+    </script>
+</body>
+</html>
